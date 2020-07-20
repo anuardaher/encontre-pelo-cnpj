@@ -1,5 +1,5 @@
 <template>
-  <div class='home'>
+  <div class='home' >
     <v-snackbar
       top
       v-model="snackbar"
@@ -14,8 +14,8 @@
         Fechar
       </v-btn>
     </v-snackbar>
-    <v-container class='search'>
-      <div class='my-4'>
+    <v-content class='search pa-2'>
+      <div>
         <v-row justify='center' align='center'>
           <v-icon size='48' class='mr-4 primary--text'>fa-building</v-icon>
             <h1 class='primary--text tracking-in-expand-fwd'>
@@ -23,8 +23,8 @@
             </h1>
         </v-row>
       </div>
-      <div class='my-4'>
-        <v-form v-model='formIsValid'>
+      <div class="mt-2">
+        <v-form v-model='formIsValid' ref="cnpj">
           <v-row>
             <v-spacer></v-spacer>
             <v-col
@@ -68,8 +68,8 @@
           </v-row>
         </v-form>
       </div>
-    </v-container>
-    <v-content class='results pa-4'>
+    </v-content>
+    <v-content class='results'>
       <v-row justify='center' align='center'>
         <div class="figure" v-if='empresas.length < 1'>
           <v-row justify='center' align='center'>
@@ -135,7 +135,7 @@ export default {
   },
   data: () => {
     return {
-      MAPS_API: process.env.VUE_APP_MAPS_API,
+      MAPS_API: process.env.MAPS_API,
       formIsValid: true,
       cnpj: '',
       empresas: [],
@@ -169,7 +169,7 @@ export default {
         }
         this.empresas.unshift(data)
         localStorage.setItem('empresas', JSON.stringify(this.empresas))
-        this.cnpj = ''
+        this.$refs.cnpj.reset()
         this.message = {
           type: 'success',
           message: 'Empresa localizada com sucesso!'
@@ -191,7 +191,7 @@ export default {
       this.mapsDialog = false
     },
     setSlideMargin () {
-      return this.$vuetify.breakpoint.xsOnly ? 'pa-2' : 'pa-12'
+      return 'pa-2'
     }
   },
   created () {
@@ -202,7 +202,27 @@ export default {
 
 <style lang='less'>
 .results {
-  height: 620px;
+  min-height: 65vh;
   background: linear-gradient(90deg, rgba(69,154,158,1) 10%, rgba(56,134,105,1) 65%)
+}
+.search {
+  height: 35vh;
+}
+
+.v-content {
+  align-items: center;
+}
+
+@media screen and (min-width: 1600px) {
+  .results {
+    height: 70vh;
+  }
+  .search {
+    height: 30vh;
+  }
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 </style>
