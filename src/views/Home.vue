@@ -135,7 +135,7 @@ export default {
   },
   data: () => {
     return {
-      MAPS_API: process.env.MAPS_API,
+      MAPS_API: process.env.VUE_APP_API_MAPS,
       formIsValid: true,
       cnpj: '',
       empresas: [],
