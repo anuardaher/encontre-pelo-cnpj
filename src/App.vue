@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-content>
-      <Home/>
-    </v-content>
+    <v-main>
+        <Home/>
+    </v-main>
   </v-app>
 </template>
 
@@ -18,9 +18,14 @@ export default {
 
 <style lang="less">
 
-html {
+.container {
+  padding: 0;
+}
+
+html, body {
   font-family: 'Roboto';
 }
+
 h1 {
   font-size: 60px;
   font-weight: 400;

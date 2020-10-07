@@ -14,64 +14,60 @@
         Fechar
       </v-btn>
     </v-snackbar>
-    <v-content class='search pa-2'>
-      <div>
-        <v-row justify='center' align='center'>
-          <v-icon size='48' class='mr-4 primary--text'>fa-building</v-icon>
-            <h1 class='primary--text tracking-in-expand-fwd'>
-              Localizador de Empresas
-            </h1>
-        </v-row>
-      </div>
-      <div class="mt-2">
-        <v-form v-model='formIsValid' ref="cnpj">
-          <v-row>
-            <v-spacer></v-spacer>
-            <v-col
-            offset-xl='1'
-            xl='3'
-            lg='4'
-            sm='7'
-            xs='12'
-            cols='12'
-            >
-                <v-text-field
-                class='cnpj-textfield'
-                v-model='cnpj'
-                outlined
-                placeholder='CNPJ...'
-                color='primary'
-                :rules='[rules.cnpj]'
-                v-mask='cnpjMask'
-                >
-                </v-text-field>
-            </v-col>
-            <v-col
-            xl='2'
-            lg='2'
-            sm='3'
-            xs='12'
-            cols='12'
-            >
-                <v-btn
-                class='mx-auto'
-                rounded
-                color='primary'
-                x-large
-                :block='$vuetify.breakpoint.xsOnly'
-                :disabled='!formIsValid'
-                @click='consultarEmpresa()'>
-                  <span class='buttom-text white--text'>Localizar</span>
-                </v-btn>
-            </v-col>
-            <v-spacer></v-spacer>
-          </v-row>
-        </v-form>
-      </div>
-    </v-content>
-    <v-content class='results'>
+    <section class='search pa-2'>
       <v-row justify='center' align='center'>
-        <div class="figure" v-if='empresas.length < 1'>
+        <v-col cols="12" class="text-center">
+          <h1 class='primary--text tracking-in-expand-fwd'>
+            <v-icon :size='$vuetify.breakpoint.mobile ? "34" : "60"' class='mr-1 primary--text'>fa-building</v-icon>
+            Localizador de Empresas
+          </h1>
+        </v-col>
+      </v-row>
+      <v-row justify='center' align='center'>
+        <v-col cols="12" xl='5' lg='6'>
+          <v-form v-model='formIsValid' ref="cnpj">
+            <v-row justify='center'>
+              <v-col
+              lg='8'
+              sm='7'
+              xs='12'
+              cols='12'
+              >
+                  <v-text-field
+                  v-model='cnpj'
+                  outlined
+                  placeholder='CNPJ...'
+                  color='primary'
+                  :rules='[rules.cnpj]'
+                  v-mask='cnpjMask'
+                  >
+                  </v-text-field>
+              </v-col>
+              <v-col
+                lg='4'
+                sm='3'
+                xs='12'
+                cols='12'
+                >
+                  <v-btn
+                  class='mx-auto'
+                  rounded
+                  color='primary'
+                  x-large
+                  :block='$vuetify.breakpoint.xsOnly'
+                  :disabled='!formIsValid'
+                  @click='consultarEmpresa()'>
+                    <span class='buttom-text white--text'>Localizar</span>
+                  </v-btn>
+                </v-col>
+              </v-row>
+          </v-form>
+        </v-col>
+      </v-row>
+    </section>
+    <section class='results pa-2'>
+      <v-row justify='center' align='center'>
+        <div class="col-12" v-if='empresas.length < 1'>
           <v-row justify='center' align='center'>
             <div class="figure">
               <v-img
@@ -89,20 +85,22 @@
             </p>
           </v-row>
         </div>
-        <v-slide-group :class="setSlideMargin()" multiple show-arrows>
-          <v-slide-item
-          :class="setSlideMargin()"
-          v-for="empresa in empresas"
-          :key="empresa.cnpj"
-          >
-            <Card
-            :empresa="empresa"
-            @card-clicked="openMaps(empresa)"
-            />
-          </v-slide-item>
+        <div class="col-12" v-else>
+         <v-slide-group multiple show-arrows class="ma-2">
+            <v-slide-item
+            class="mx-auto"
+            v-for="empresa in empresas"
+            :key="empresa.cnpj"
+            >
+              <Card
+              :empresa="empresa"
+              @card-clicked="openMaps(empresa)"
+              />
+            </v-slide-item>
         </v-slide-group>
+      </div>
       </v-row>
-    </v-content>
+    </section>
     <v-dialog
     v-if="mapsDialog"
     v-model="mapsDialog"
@@ -189,9 +187,6 @@ export default {
     },
     closeMaps () {
       this.mapsDialog = false
-    },
-    setSlideMargin () {
-      return 'pa-2'
     }
   },
   created () {
@@ -202,24 +197,11 @@ export default {
 
 <style lang='less'>
 .results {
-  min-height: 65vh;
+  height: 60vh;
   background: linear-gradient(90deg, rgba(69,154,158,1) 10%, rgba(56,134,105,1) 65%)
 }
 .search {
-  height: 35vh;
-}
-
-.v-content {
-  align-items: center;
-}
-
-@media screen and (min-width: 1600px) {
-  .results {
-    height: 70vh;
-  }
-  .search {
-    height: 30vh;
-  }
+  min-height: 40vh;
 }
 
 body::-webkit-scrollbar {
