@@ -2,8 +2,8 @@
   <div class="card slide-in-bottom">
     <v-card
     min-height="300"
-    :max-width="setCardSize()"
-    :min-width="setCardSize()"
+    max-width="300"
+    min-width="250"
     @click="$emit('card-clicked')"
     >
       <v-card-title v-if="backBtn">
@@ -48,11 +48,6 @@ export default {
   props: {
     empresa: Object,
     backBtn: Boolean
-  },
-  methods: {
-    setCardSize () {
-      return this.$vuetify.breakpoint.xsOnly ? '250' : '320'
-    }
   }
 }
 </script>

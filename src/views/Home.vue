@@ -88,7 +88,7 @@
         <div class="col-12" v-else>
          <v-slide-group multiple show-arrows class="ma-2">
             <v-slide-item
-            class="mx-auto"
+            class="mx-auto mr-2"
             v-for="empresa in empresas"
             :key="empresa.cnpj"
             >
